@@ -1,9 +1,7 @@
 const dotenv=require('dotenv')
 dotenv.config()
 
-//mongodb connection
-const mongo=require('./connect')
-mongo.connect()
+
 
 //json web token
 const jwt=require('jsonwebtoken')
@@ -13,6 +11,12 @@ const express=require('express')
 const app=express()
 //buit-in middleware
 app.use(express.json())
+
+//mongodb connection
+const mongo=require('./connect')
+mongo.connect()
+
+
 //cross origin resource sharing(cors)
 const cors=require('cors')
 app.use(cors())
