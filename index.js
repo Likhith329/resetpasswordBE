@@ -13,7 +13,7 @@ const express=require('express')
 const app=express()
 //buit-in middleware
 app.use(express.json())
-//cross origin resource sharing
+//cross origin resource sharing(cors)
 const cors=require('cors')
 app.use(cors())
 //listening to server
