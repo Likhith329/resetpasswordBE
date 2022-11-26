@@ -72,7 +72,7 @@ app.post('/forgotpassword',async(req,res)=>{
     //updating the token to database
     await mongo.selectedDb.collection('Reset').updateOne({email:req.body.user.email},{$set:{token:token}})
     //creating and sending the link through email
-    const link=`https://resetpasswordfe.netlify.app/resetpassword/${req.body.user.email}/${token}`
+    const link=`https://likhith329.github.io/resetpasswordfe/resetpassword/${req.body.user.email}/${token}`
     sendEmail(req.body.user.email,link).then(resp=> res.send(resp)).catch(error=>res.send(error))
  
 })
