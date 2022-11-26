@@ -20,8 +20,7 @@ mongo.connect()
 //cross origin resource sharing(cors)
 const cors=require('cors')
 app.use(cors())
-//listening to server
-app.listen(process.env.PORT)
+
 
 //nodemailer
 const nodemailer=require('nodemailer')
@@ -79,6 +78,7 @@ app.post('/forgotpassword',async(req,res)=>{
 })
 
 
-
+//listening to server
+app.listen(process.env.PORT)
 
 
