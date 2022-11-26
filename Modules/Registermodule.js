@@ -1,5 +1,5 @@
 const mongo=require('../connect')
-const bcrypt=require('bcrypt')
+
 
 module.exports.createuser=async(req,res)=>{
     //email validation
