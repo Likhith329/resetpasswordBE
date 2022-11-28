@@ -63,18 +63,30 @@ app.use('/users',Userrouter)
 
 //secret key or privatekey
 const privatekey=process.env.PRIVATE_KEY
-
 // creation of token and sending the token through email
 app.post('/forgotpassword',async(req,res)=>{
 
     //token creation 
-    const token=jwt.sign(req.body.user,privatekey,{expiresIn:'120s'})
-    //updating the token to database
-    await mongo.selectedDb.collection('Reset').updateOne({email:req.body.user.email},{$set:{token:token}})
+    const token=jwt.sign(req.body.user,privatekey,{expiresIn:'60s'})
+     //updating the token to database
+     await mongo.selectedDb.collection('Reset').updateOne({email:req.body.user.email},{$set:{token:token}})
     //creating and sending the link through email
     const link=`http://localhost:3000/resetpassword/${req.body.user.email}/${token}`
     sendEmail(req.body.user.email,link).then(resp=> res.send(resp)).catch(error=>res.send(error))
  
+})
+
+app.post('/resetpassword',async(req,res)=>{
+   
+    //validate token
+    try {
+        const validuser=jwt.verify(req.body.user.token,privatekey)
+        res.send('token validated')
+        console.log('token validated')
+    } catch (error) {
+        console.log(error)
+        res.status(400).send('token expired!!')
+    }
 })
 
 
